@@ -17,6 +17,10 @@ import {
   Register,
   Checkout,
   PageNotFound,
+  Dashboard,
+  Products_Ad,
+  OrderList,
+  ProductStock,
 } from "./pages";
 import ScrollToTop from "./components/ScrollToTop";
 import { Toaster } from "react-hot-toast";
@@ -38,6 +42,10 @@ root.render(
           <Route path="/checkout" element={<Checkout />} />
           <Route path="*" element={<PageNotFound />} />
           <Route path="/product/*" element={<PageNotFound />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/products_ad" element={<Products_Ad />} />
+          <Route path="/orderlist" element={<OrderList />} />
+          <Route path="/productstock" element={<ProductStock />} />
         </Routes>
       </Provider>
     </ScrollToTop>
