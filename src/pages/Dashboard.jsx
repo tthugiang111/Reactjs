@@ -1,23 +1,40 @@
-import React from "react";
+import React, {useState} from "react";
 import { FaUsers,FaUber, FaShoppingCart, FaDollarSign, FaClock, FaBox, FaList, FaChartBar, FaSignOutAlt, FaBars } from "react-icons/fa";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from "recharts";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 
-const data = [
-  { name: "5k", sales: 20 },
-  { name: "10k", sales: 40 },
-  { name: "15k", sales: 45 },
-  { name: "20k", sales: 30 },
-  { name: "25k", sales: 70 },
-  { name: "30k", sales: 35 },
-  { name: "35k", sales: 50 },
-  { name: "40k", sales: 65 },
-  { name: "45k", sales: 40 },
-  { name: "50k", sales: 55 },
-  { name: "55k", sales: 50 },
-  { name: "60k", sales: 60 },
-];
+const salesData = {
+  "January": [
+    { name: "5k", sales: 10 },
+    { name: "10k", sales: 20 },
+    { name: "15k", sales: 30 },
+    { name: "20k", sales: 40 },
+    { name: "25k", sales: 70 },
+    { name: "30k", sales: 35 },
+    { name: "35k", sales: 50 },
+  ],
+  "February": [
+    { name: "5k", sales: 20 },
+    { name: "10k", sales: 40 },
+    { name: "15k", sales: 45 },
+    { name: "20k", sales: 30 },
+    { name: "25k", sales: 70 },
+    { name: "30k", sales: 35 },
+    { name: "35k", sales: 50 },
+  ],
+};
+
+const transactionsData = {
+  "January": [
+    { product: "Apple Watch", location: "NYC", date: "12.01.2024", quantity: 10, amount: "$2000", status: "Delivered" },
+  ],
+  "February": [
+    { product: "Samsung TV", location: "LA", date: "15.02.2024", quantity: 5, amount: "$5000", status: "Pending" },
+  ],
+};
+
+
 
 const Sidebar = () => {
   return (
@@ -45,8 +62,8 @@ const Sidebar = () => {
               </Link>
             </li>
             <li className="nav-item">
-                <Link to="/contact" className="nav-link text-dark">
-                    <FaUber className="me-2" /> Contact
+                <Link to="/customer" className="nav-link text-dark">
+                    <FaUber className="me-2" /> Customer
                 </Link>
             </li>
           </ul>
@@ -75,6 +92,7 @@ const Header = () => {
 };
 
 const Dashboard = () => {
+  const [selectedMonth, setSelectedMonth] = useState("January");
   return (
     <div className="d-flex">
       <Sidebar />
@@ -107,10 +125,17 @@ const Dashboard = () => {
               </div>
             ))}
           </div>
+          <div className="d-flex justify-content-end">
+            <select className="form-select w-auto" value={selectedMonth} onChange={(e) => setSelectedMonth(e.target.value)}>
+              {Object.keys(salesData).map((month) => (
+                <option key={month} value={month}>{month}</option>
+              ))}
+            </select>
+          </div>
           <div className="card shadow-sm p-4 mt-4">
             <h4>Sales Details</h4>
             <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={data}>
+              <LineChart data={salesData[selectedMonth] || []}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" />
                 <YAxis />
@@ -126,21 +151,25 @@ const Dashboard = () => {
                 <tr>
                   <th>Product</th>
                   <th>Location</th>
-                  <th>Date - Time</th>
+                  <th>Date</th>
                   <th>Quantity</th>
                   <th>Amount</th>
                   <th>Status</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Apple Watch</td>
-                  <td>6096 Marjolaine Landing</td>
-                  <td>12.09.2019 - 12:53 PM</td>
-                  <td>423</td>
-                  <td>$34,295</td>
-                  <td><span className="badge bg-success">Delivered</span></td>
-                </tr>
+                {(transactionsData[selectedMonth] || []).map((transaction, index) => (
+                  <tr key={index}>
+                    <td>{transaction.product}</td>
+                    <td>{transaction.location}</td>
+                    <td>{transaction.date}</td>
+                    <td>{transaction.quantity}</td>
+                    <td>{transaction.amount}</td>
+                    <td>
+                      <span className={`badge bg-${transaction.status === "Delivered" ? "success" : "warning"}`}>{transaction.status}</span>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>

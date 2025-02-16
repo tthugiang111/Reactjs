@@ -29,8 +29,8 @@ const Sidebar = () => {
           </Link>
         </li>
         <li className="nav-item">
-          <Link to="/contact" className="nav-link text-dark">
-            <FaUber className="me-2" /> Contact
+          <Link to="/customer" className="nav-link text-dark">
+            <FaUber className="me-2" /> Customer
           </Link>
         </li>
       </ul>
@@ -124,6 +124,10 @@ const [showDeleteModal, setShowDeleteModal] = useState(false);
                 </tr>
               ))}
             </tbody>
+            <div className="d-flex mt-3">
+              <button className="btn btn-light">&lt;</button>
+              <button className="btn btn-light"> &gt;</button>
+            </div>
           </table>
         </div>
       </div>

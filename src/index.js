@@ -21,6 +21,10 @@ import {
   Products_Ad,
   OrderList,
   ProductStock,
+  AddProducts,
+  EditProducts,
+  Customer,
+  PurchasesHistory,
 } from "./pages";
 import ScrollToTop from "./components/ScrollToTop";
 import { Toaster } from "react-hot-toast";
@@ -46,6 +50,10 @@ root.render(
           <Route path="/products_ad" element={<Products_Ad />} />
           <Route path="/orderlist" element={<OrderList />} />
           <Route path="/productstock" element={<ProductStock />} />
+          <Route path="/addproduct" element={<AddProducts />} />
+          <Route path="/editproducts" element={<EditProducts />} />
+          <Route path="/customer" element={<Customer />} />
+          <Route path="/purchaseshistory" element={<PurchasesHistory />} />
         </Routes>
       </Provider>
     </ScrollToTop>

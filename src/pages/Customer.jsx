@@ -31,7 +31,7 @@ const Sidebar = () => {
           </Link>
         </li>
         <li className="nav-item">
-          <Link to="/products_ad" className="nav-link text-white fw-bold bg-primary p-2 rounded">
+          <Link to="/products_ad" className="nav-link text-dark">
             <FaBox className="me-2" /> Products
           </Link>
         </li>
@@ -46,7 +46,7 @@ const Sidebar = () => {
           </Link>
         </li>
         <li className="nav-item">
-            <Link to="/customer" className="nav-link text-dark">
+            <Link to="/customer" className="nav-link text-white fw-bold bg-primary p-2 rounded">
                 <FaUber className="me-2" /> Customer
             </Link>
         </li>
@@ -59,7 +59,7 @@ const Sidebar = () => {
   );
 };
 
-const Products_Ad = () => {
+const Customer = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -80,8 +80,8 @@ const Products_Ad = () => {
         <Header />
         <div className="container mt-5 py-4">
           <div className="d-flex justify-content-between align-items-center mb-3">
-            <h2 className="fw-bold">Products</h2>
-            <Link to="/addproduct" className="btn btn-primary">Add Product</Link>
+            <h2 className="fw-bold">Customers</h2>
+            <Link to="/addproduct" className="btn btn-primary">Add New Customer</Link>
           </div>
           <div className="row mt-3">
             {loading ? (
@@ -93,12 +93,10 @@ const Products_Ad = () => {
                     <img src={product.image} className="card-img-top mx-auto" alt={product.title} style={{ height: "200px", objectFit: "contain" }} />
                     <div className="card-body">
                       <h5 className="card-title text-truncate">{product.title}</h5>
-                      <p className="text-primary fw-bold">${product.price}</p>
                       <div className="d-flex justify-content-center align-items-center">
-                        <span className="text-warning me-2">★★★★☆</span>
-                        <small className="text-muted">(131)</small>
+                        <span>hung@gmail.com</span>
                       </div>
-                      <Link to="/editproducts" className="btn btn-outline-primary mt-2">Edit Product</Link>
+                      <Link to="/purchaseshistory" className="btn btn-outline-primary mt-2">Purchases history</Link>
                     </div>
                   </div>
                 </div>
@@ -111,4 +109,4 @@ const Products_Ad = () => {
   );
 };
 
-export default Products_Ad;
+export default Customer;
